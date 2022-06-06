@@ -1,36 +1,57 @@
 <template>
   <div class="fluid-container">
     <div class="d-flex w-100 justify-content-center p-3 mb-4">
-      <div class="card">
-        <div class="card-header">
-          Ex 1
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <el-cascader
-            v-model="value"
-            :options="options"
-            :props="{ multiple: true, checkStrictly: true }"
-            clearable
-          ></el-cascader>      
-        </div>
+      <div>
+        <button type="button" class="btn btn-info" @click="changeMode('create')">新增</button>
+        <button type="button" class="btn btn-success ml-2" @click="changeMode('update')">修改</button>
       </div>
     </div>
     <div class="d-flex w-100 justify-content-center p-3 mb-4">
-      <div class="card">
+      <div class="card text-left">
         <div class="card-header">
-          Ex 2
+          {{ this.mode === '' ? '請選擇操作' : this.mode === 'create' ? '新增分類' : '修改分類' }}
         </div>
         <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
+          <h5 class="card-title">分類選擇</h5>
           <el-cascader
-            v-model="value1"
+            v-model="value"
             :options="options"
-            :show-all-levels="false"
-          ></el-cascader>      
+            :props="{ multiple: false, checkStrictly: true, emitPath: false }"
+            clearable
+          ></el-cascader>
+          <small v-if="this.mode == 'create'" class="form-text text-muted">
+            若未選擇欲往下新增的分類，則新增最上層分類</small>
+
+
+          <h5 class="card-title mt-3">分類名稱</h5>
+          <div class="form-group">
+<!--            <label for="categoryName">分類名稱</label>-->
+            <input type="text" class="form-control"
+                   id="categoryName" placeholder="name"
+                   v-model="data.name"
+            >
+
+            <button class="btn btn-primary mt-3" :disabled="this.mode === '' || this.data.name === ''" @click="save">存檔</button>
+          </div>
         </div>
       </div>
     </div>
+
+<!--    <div class="d-flex w-100 justify-content-center p-3 mb-4">-->
+<!--      <div class="card">-->
+<!--        <div class="card-header">-->
+<!--          Ex 2-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--          <h5 class="card-title">Special title treatment</h5>-->
+<!--          <el-cascader-->
+<!--            v-model="value1"-->
+<!--            :options="options"-->
+<!--            :show-all-levels="false"-->
+<!--          ></el-cascader>      -->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
    
   </div>
 </template>
@@ -309,6 +330,11 @@ export default {
       ],
       value: [],
       value1: null,
+      mode:"",
+      data:{
+        parent: null,
+        name: ""
+      }
     };
   },
   watch: {
@@ -324,6 +350,53 @@ export default {
       },
       deep: true
     },
+  },
+  methods:{
+    changeMode(mode){
+      this.mode = mode
+    },
+    save(){
+      switch (this.mode){
+        case "create":
+          if(this.value.length != 0){
+            this.data.parent = this.value[0]
+          }
+          fetch(`/api/clam/category`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.data)
+          }).then(res => {
+            if (res.ok) {
+              window.location.reload()
+            }else {
+              alert("新增失敗")
+            }
+          })
+          break;
+        case "update":
+          fetch(`/api/clam/category`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.data)
+          }).then(res => {
+            if (res.ok) {
+              window.location.reload()
+            }else {
+              alert("修改失敗")
+            }
+          })
+          break;
+      }
+
+
+
+    },
+    createCategory(){
+      this.mode = 'create'
+    },
+    updateCategory(){
+      this.mode = 'update'
+    }
   }
 };
 </script>
