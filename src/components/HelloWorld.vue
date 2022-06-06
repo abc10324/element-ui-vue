@@ -1,58 +1,332 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="fluid-container">
+    <div class="d-flex w-100 justify-content-center p-3 mb-4">
+      <div class="card">
+        <div class="card-header">
+          Ex 1
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <el-cascader
+            v-model="value"
+            :options="options"
+            :props="{ multiple: true, checkStrictly: true }"
+            clearable
+          ></el-cascader>      
+        </div>
+      </div>
+    </div>
+    <div class="d-flex w-100 justify-content-center p-3 mb-4">
+      <div class="card">
+        <div class="card-header">
+          Ex 2
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <el-cascader
+            v-model="value1"
+            :options="options"
+            :show-all-levels="false"
+          ></el-cascader>      
+        </div>
+      </div>
+    </div>
+   
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  data() {
+    return {
+      options: [
+        {
+          value: "guide",
+          label: "Guide",
+          children: [
+            {
+              value: "disciplines",
+              label: "Disciplines",
+              children: [
+                {
+                  value: "consistency",
+                  label: "Consistency",
+                },
+                {
+                  value: "feedback",
+                  label: "Feedback",
+                },
+                {
+                  value: "efficiency",
+                  label: "Efficiency",
+                },
+                {
+                  value: "controllability",
+                  label: "Controllability",
+                },
+              ],
+            },
+            {
+              value: "navigation",
+              label: "Navigation",
+              children: [
+                {
+                  value: "side nav",
+                  label: "Side Navigation",
+                },
+                {
+                  value: "top nav",
+                  label: "Top Navigation",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: "component",
+          label: "Component",
+          children: [
+            {
+              value: "basic",
+              label: "Basic",
+              children: [
+                {
+                  value: "layout",
+                  label: "Layout",
+                },
+                {
+                  value: "color",
+                  label: "Color",
+                },
+                {
+                  value: "typography",
+                  label: "Typography",
+                },
+                {
+                  value: "icon",
+                  label: "Icon",
+                },
+                {
+                  value: "button",
+                  label: "Button",
+                },
+              ],
+            },
+            {
+              value: "form",
+              label: "Form",
+              children: [
+                {
+                  value: "radio",
+                  label: "Radio",
+                },
+                {
+                  value: "checkbox",
+                  label: "Checkbox",
+                },
+                {
+                  value: "input",
+                  label: "Input",
+                },
+                {
+                  value: "input-number",
+                  label: "InputNumber",
+                },
+                {
+                  value: "select",
+                  label: "Select",
+                },
+                {
+                  value: "cascader",
+                  label: "Cascader",
+                },
+                {
+                  value: "switch",
+                  label: "Switch",
+                },
+                {
+                  value: "slider",
+                  label: "Slider",
+                },
+                {
+                  value: "time-picker",
+                  label: "TimePicker",
+                },
+                {
+                  value: "date-picker",
+                  label: "DatePicker",
+                },
+                {
+                  value: "datetime-picker",
+                  label: "DateTimePicker",
+                },
+                {
+                  value: "upload",
+                  label: "Upload",
+                },
+                {
+                  value: "rate",
+                  label: "Rate",
+                },
+                {
+                  value: "form",
+                  label: "Form",
+                },
+              ],
+            },
+            {
+              value: "data",
+              label: "Data",
+              children: [
+                {
+                  value: "table",
+                  label: "Table",
+                },
+                {
+                  value: "tag",
+                  label: "Tag",
+                },
+                {
+                  value: "progress",
+                  label: "Progress",
+                },
+                {
+                  value: "tree",
+                  label: "Tree",
+                },
+                {
+                  value: "pagination",
+                  label: "Pagination",
+                },
+                {
+                  value: "badge",
+                  label: "Badge",
+                },
+              ],
+            },
+            {
+              value: "notice",
+              label: "Notice",
+              children: [
+                {
+                  value: "alert",
+                  label: "Alert",
+                },
+                {
+                  value: "loading",
+                  label: "Loading",
+                },
+                {
+                  value: "message",
+                  label: "Message",
+                },
+                {
+                  value: "message-box",
+                  label: "MessageBox",
+                },
+                {
+                  value: "notification",
+                  label: "Notification",
+                },
+              ],
+            },
+            {
+              value: "navigation",
+              label: "Navigation",
+              children: [
+                {
+                  value: "menu",
+                  label: "NavMenu",
+                },
+                {
+                  value: "tabs",
+                  label: "Tabs",
+                },
+                {
+                  value: "breadcrumb",
+                  label: "Breadcrumb",
+                },
+                {
+                  value: "dropdown",
+                  label: "Dropdown",
+                },
+                {
+                  value: "steps",
+                  label: "Steps",
+                },
+              ],
+            },
+            {
+              value: "others",
+              label: "Others",
+              children: [
+                {
+                  value: "dialog",
+                  label: "Dialog",
+                },
+                {
+                  value: "tooltip",
+                  label: "Tooltip",
+                },
+                {
+                  value: "popover",
+                  label: "Popover",
+                },
+                {
+                  value: "card",
+                  label: "Card",
+                },
+                {
+                  value: "carousel",
+                  label: "Carousel",
+                },
+                {
+                  value: "collapse",
+                  label: "Collapse",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          value: "resource",
+          label: "Resource",
+          children: [
+            {
+              value: "axure",
+              label: "Axure Components",
+            },
+            {
+              value: "sketch",
+              label: "Sketch Templates",
+            },
+            {
+              value: "docs",
+              label: "Design Documentation",
+            },
+          ],
+        },
+      ],
+      value: [],
+      value1: null,
+    };
+  },
+  watch: {
+    value: {
+      handler(newValue){
+        console.log(JSON.parse(JSON.stringify(newValue)))
+      },
+      deep: true
+    },
+    value1: {
+      handler(newValue){
+        console.log(JSON.parse(JSON.stringify(newValue)))
+      },
+      deep: true
+    },
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>
