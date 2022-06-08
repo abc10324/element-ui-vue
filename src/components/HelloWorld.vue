@@ -463,14 +463,12 @@ export default {
             this.data.parent = newValue
           }
         }else if(this.mode === 'update'){
-          let node = this.$refs["cascader"].getCheckedNodes()[0]
-          this.isLeafCategory = !node.hasChildren
-          this.data.name = node.label
-          this.data.categoryId = newValue
-          this.data.parent = null
-          if(node.parent != null){
-            this.data.parent = node.parent.data.value
-          }
+          this.$refs["cascader"].getCheckedNodes().forEach((node) =>{
+            this.isLeafCategory = !node.hasChildren
+            this.data.name = node.label
+            this.data.categoryId = newValue
+            this.data.parent = node.parent? node.parent.data.value : null
+          })
         }
         console.log("newValue=", JSON.parse(JSON.stringify(newValue)))
         console.log(" this.data=",  this.data)
